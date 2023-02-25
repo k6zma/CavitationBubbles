@@ -1,0 +1,9 @@
+opencv-python==3.4.17.61
+seaborn==0.12.2
+scikit-learn==1.2.1
+scikit-plot==0.3.7
+numpy==1.24.2
+pandas==1.5.3
+jupyter==1.0.0
+matplotlib==3.7.0
+tensorflow==2.11.0
