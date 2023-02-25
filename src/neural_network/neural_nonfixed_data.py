@@ -13,9 +13,9 @@ from keras.applications.vgg16 import VGG16
 from keras.applications.vgg19 import preprocess_input
 from keras.applications.vgg16 import preprocess_input
 
-train_dir = os.path.join('data/fixed_data/train')
-test_dir = os.path.join('data/fixed_data/test')
-val_dir = os.path.join('data/fixed_data/val')
+train_dir = os.path.join('data/nonfixed_data/train')
+test_dir = os.path.join('data/nonfixed_data/test')
+val_dir = os.path.join('data/nonfixed_data/val')
 
 image_size = (448, 448)
 fine_tune_at_procent = 0.2
