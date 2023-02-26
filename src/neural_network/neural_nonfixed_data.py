@@ -37,13 +37,11 @@ fine_tune_at = int(len(model.layers) * fine_tune_at_procent)
 for layer in model.layers[:fine_tune_at]:
     layer.trainable = False
 data_aug_layers = tf.keras.Sequential([tf.keras.layers.RandomRotation(0.2),
-                                       tf.keras.layers.RandomBrightness(0.2),
                                        tf.keras.layers.RandomFlip('horizontal')])
 
 global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
 gap = tf.keras.layers.GlobalAveragePooling2D()
-prediction_layer = tf.keras.layers.Dense(
-    len(test_dataset.class_names), activation='softmax')
+prediction_layer = tf.keras.layers.Dense(7, activation='softmax')
 inputs = tf.keras.Input(shape=input_shape)
 
 x = data_aug_layers(inputs)

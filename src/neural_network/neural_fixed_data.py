@@ -30,7 +30,9 @@ test_dataset = tf.keras.utils.image_dataset_from_directory(
 val_dataset = tf.keras.utils.image_dataset_from_directory(
     val_dir, shuffle=True, batch_size=batch_size, image_size=image_size)
 
-model = VGG16(input_shape=input_shape, include_top=False, weights='imagenet')
+print(len(test_dataset.class_names))
+
+model = VGG16(input_shape=input_shape, include_top=False, weights='imagenet', number_neurons=7)
 model.trainable = True
 fine_tune_at = int(len(model.layers) * fine_tune_at_procent)
 
