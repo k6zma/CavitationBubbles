@@ -7,11 +7,9 @@ import matplotlib.pyplot as plt
 
 from keras.layers import preprocessing
 
-from keras.applications.vgg19 import VGG19
-from keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.resnet50 import ResNet50
 
-from keras.applications.vgg19 import preprocess_input
-from keras.applications.vgg16 import preprocess_input
+from tensorflow.keras.applications.resnet50 import preprocess_input
 
 train_dir = os.path.join('data/nonfixed_data/train')
 test_dir = os.path.join('data/nonfixed_data/test')
@@ -30,7 +28,8 @@ test_dataset = tf.keras.utils.image_dataset_from_directory(
 val_dataset = tf.keras.utils.image_dataset_from_directory(
     val_dir, shuffle=True, batch_size=batch_size, image_size=image_size)
 
-model = VGG16(input_shape=input_shape, include_top=False, weights='imagenet')
+model = ResNet50(input_shape=input_shape,
+                 include_top=False, weights='imagenet')
 model.trainable = True
 fine_tune_at = int(len(model.layers) * fine_tune_at_procent)
 
