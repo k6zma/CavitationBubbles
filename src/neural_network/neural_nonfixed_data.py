@@ -41,7 +41,8 @@ data_aug_layers = tf.keras.Sequential([tf.keras.layers.RandomRotation(0.2),
 
 global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
 gap = tf.keras.layers.GlobalAveragePooling2D()
-prediction_layer = tf.keras.layers.Dense(7, activation='softmax')
+prediction_layer = tf.keras.layers.Dense(
+    7, activation='softmax')
 inputs = tf.keras.Input(shape=input_shape)
 
 x = data_aug_layers(inputs)
@@ -55,4 +56,4 @@ model = tf.keras.Model(inputs, outputs)
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.01),
               loss=tf.keras.losses.SparseCategoricalCrossentropy(), metrics=['accuracy'])
 
-history = model.fit(train_dataset, epochs=100, validation_data=val_dataset)
+history = model.fit(train_dataset, epochs=5, validation_data=val_dataset)
