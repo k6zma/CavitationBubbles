@@ -14,16 +14,16 @@ import matplotlib.pyplot as plt
 IMAGE_SIZE = [224, 224]
 
 
-train_path = 'data/train'
-valid_path = 'data/test'
+train_path = 'data/fixed_data/train'
+valid_path = 'data/fixed_data/test'
 
 vgg = ResNet50(input_shape=IMAGE_SIZE + [3],
-            weights='imagenet', include_top=False)
+               weights='imagenet', include_top=False)
 
 for layer in vgg.layers:
     layer.trainable = True
 
-folders = glob('data/train/*')
+folders = glob('data/fixed_data/train/*')
 folders
 
 x = Flatten()(vgg.output)
@@ -50,16 +50,15 @@ train_datagen = ImageDataGenerator(rescale=1./255,
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 
-training_set = train_datagen.flow_from_directory('data/train',
+training_set = train_datagen.flow_from_directory('data/fixed_data/train',
                                                  target_size=(224, 224),
                                                  batch_size=128,
                                                  class_mode='categorical')
 
-test_set = test_datagen.flow_from_directory('data/test',
+test_set = test_datagen.flow_from_directory('data/fixed_data/test',
                                             target_size=(224, 224),
                                             batch_size=128,
                                             class_mode='categorical')
-
 
 
 r = model.fit_generator(
@@ -74,13 +73,13 @@ plt.plot(r.history['loss'], label='train loss')
 plt.plot(r.history['val_loss'], label='val loss')
 plt.legend()
 plt.show()
-plt.savefig('LossVal_loss.jpg')
+plt.savefig('data/graphs/cnn_model/LossVal_loss.jpg')
 
 plt.plot(r.history['accuracy'], label='train acc')
 plt.plot(r.history['val_accuracy'], label='val acc')
 plt.legend()
 plt.show()
-plt.savefig('AccVal_acc.jpg')
+plt.savefig('data/graphs/cnn_model/AccVal_acc.jpg')
 
 
-model.save('model_vgg19.h5')
+model.save('data/model/model_resnet_50.h5')
