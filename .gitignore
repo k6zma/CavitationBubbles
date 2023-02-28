@@ -1,3 +1,4 @@
+.gitignore
 data/fixed_data/output_test
 data/fixed_data/output_train
 data/fixed_data/tmp_csv_test
