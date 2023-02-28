@@ -1,4 +1,3 @@
-.gitignore
 data/fixed_data/output_test
 data/fixed_data/output_train
 data/fixed_data/tmp_csv_test
@@ -19,3 +18,4 @@ data/fixed_data/ResultTest_FixedData.csv
 data/fixed_data/ResultTrain_FixedData.csv
 data/nonfixed_data/ResultTest_NonFixedData.csv
 data/nonfixed_data/ResultTrain_NonFixedData.csv
+.gitignore
