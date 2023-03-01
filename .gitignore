@@ -19,3 +19,4 @@ data/fixed_data/ResultTrain_FixedData.csv
 data/nonfixed_data/ResultTest_NonFixedData.csv
 data/nonfixed_data/ResultTrain_NonFixedData.csv
 .gitignore
+data/logs
