@@ -6,8 +6,6 @@ data/nonfixed_data/output_test
 data/nonfixed_data/output_train
 data/nonfixed_data/tmp_csv_test
 data/nonfixed_data/tmp_csv_train
-data/model/my_model.h5py
-data/model/history.csv
 data/fixed_data/ResultTest_FixedData.csv
 data/fixed_data/ResultTrain_FixedData.csv
 data/nonfixed_data/ResultTest_NonFixedData.csv
