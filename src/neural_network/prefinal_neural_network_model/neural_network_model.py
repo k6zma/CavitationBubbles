@@ -5,6 +5,8 @@ import tensorflow as tf
 import pandas as pd
 import keras
 import datetime
+import visualkeras
+
 
 from keras.applications.vgg19 import VGG19
 from keras.applications.vgg16 import VGG16
@@ -82,13 +84,15 @@ def create_model(VGG16, preprocessing, data_aug_layers=None, INPUT_SHAPE: tuple 
 
     return model
 
-
 current_model = create_model(
     ResNet50V2, preprocessing_for_models, INPUT_SHAPE=IMG_SHAPE, fine_tune_at_procent=0.2)
 current_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-6),
                       loss=tf.keras.losses.SparseCategoricalCrossentropy(),
                       metrics=['accuracy'])
 current_model.summary()
+
+tf.keras.utils.plot_model(current_model, to_file='model.png', show_shapes=True, show_layer_names=True)
+
 history = current_model.fit(train_dataset, epochs=EPOCHS,
                             validation_data=val_dataset, callbacks=[tensorflow_callback])
 current_model.save('data/model/my_model.h5py')
