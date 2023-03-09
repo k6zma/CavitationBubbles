@@ -22,7 +22,7 @@ test_dir = os.path.join('data/nonfixed_data/test')
 AUTOTUNE = tf.data.AUTOTUNE
 
 BATCH_SIZES = 72
-EPOCHS = 5
+EPOCHS = 100
 IMG_SIZES = (224, 224)
 
 train_dataset = tf.keras.utils.image_dataset_from_directory(train_dir, shuffle=True, batch_size = BATCH_SIZES, image_size = IMG_SIZES)

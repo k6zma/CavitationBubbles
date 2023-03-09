@@ -132,7 +132,7 @@ df_0_water.to_csv("data/fixed_data/tmp_csv_test/0_water.csv", index=False)
 df_5_alcohol = pd.concat([pd.read_csv(f)
                          for f in alcohol_5_dir.glob("*.csv")], ignore_index=True)
 df_5_alcohol.drop(columns=df_5_alcohol.columns[0], axis=1, inplace=True)
-df_5_alcohol.to_csv("data/fixed_data/tmp_csv_test/96_alcohol.csv", index=False)
+df_5_alcohol.to_csv("data/fixed_data/tmp_csv_test/5_alcohol.csv", index=False)
 
 df_12_5_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_12_5_dir.glob("*.csv")], ignore_index=True)

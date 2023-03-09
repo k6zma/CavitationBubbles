@@ -133,7 +133,7 @@ df_5_alcohol = pd.concat([pd.read_csv(f)
                          for f in alcohol_5_dir.glob("*.csv")], ignore_index=True)
 df_5_alcohol.drop(columns=df_5_alcohol.columns[0], axis=1, inplace=True)
 df_5_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/96_alcohol.csv", index=False)
+    "data/nonfixed_data/tmp_csv_train/5_alcohol.csv", index=False)
 
 df_12_5_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_12_5_dir.glob("*.csv")], ignore_index=True)
@@ -167,4 +167,4 @@ df_96_alcohol.to_csv(
 
 df_ResultTest = pd.concat(
     [pd.read_csv(f) for f in ResultTest_dir.glob("*.csv")], ignore_index=True)
-df_ResultTest.to_csv("data/nonfixed_data/tmp_csv_train/ResultTrain_NonFixedData.csv", index=False)
+df_ResultTest.to_csv("data/nonfixed_data/ResultTrain_NonFixedData.csv", index=False)

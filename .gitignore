@@ -12,3 +12,4 @@ data/nonfixed_data/ResultTest_NonFixedData.csv
 data/nonfixed_data/ResultTrain_NonFixedData.csv
 .gitignore
 data/logs
+data/model
