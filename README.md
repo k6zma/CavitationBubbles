@@ -67,34 +67,40 @@ Example of collected dataframe:
 
 ## Maсhine Learning
 
-KNeighborsClassifier - average model accuracy on test and validation data ~ 99%
+### KNeighborsClassifier - average model accuracy on test and validation data ~ 99%
 
 Best Hyperparameters:
 
+```
 - metric: manhattan
 - n_neighbors: 97
 - weights: distance
+```
 
-GradientBoostingClassifier - average model accuracy on test and validation data ~ 99%
+### GradientBoostingClassifier - average model accuracy on test and validation data ~ 99%
 
 Best Hyperparameters:
 
+```
 - max_depth: 5
 - max_features: sqrt
 - min_samples_leaf: 0.1
 - min_samples_split: 0.1
 - n_estimators: 10
 - subsample: 1.0
+```
 
-RandomForestClassifier - average model accuracy on test and validation data ~ 99%
+### RandomForestClassifier - average model accuracy on test and validation data ~ 99%
 
 Best Hyperparameters:
 
+```
 - bootstrap: True
 - max_depth: 90
 - min_samples_leaf: 1
 - min_samples_split: 5
 - n_estimators: 600
+```
 
 ## Neural Network
 
