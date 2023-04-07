@@ -1,3 +1,5 @@
+# total accuracy on the test_data 90%
+
 import time
 import os
 import copy
@@ -14,20 +16,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sn
 
-#checking if there is amy GPU for faser training
+# checking if there is amy GPU for faser training
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-#folder with data
+# folder with data
 data_dir = 'data/nonfixed_data'
 
-#making dir for saving model
+# making dir for saving model
 savepath = 'data/model/model_torch'
 try:
     os.mkdir(savepath)
 except Exception:
-    pass 
+    pass
 
-#making image(data) augmentation
+# making image(data) augmentation
 data_transforms = {
     'train': transforms.Compose([
         transforms.Resize(224),
@@ -52,19 +54,19 @@ data_transforms = {
     ])
 }
 
-#splitting data for train, test, val
+# splitting data for train, test, val
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
                   for x in ['train', 'val', 'test']}
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=48,
-                                             shuffle=True, num_workers=4)
-              for x in ['train', 'val', 'test']}
+                                              shuffle=True, num_workers=4)
+               for x in ['train', 'val', 'test']}
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val', 'test']}
 
-#saving the name of the classes
+# saving the name of the classes
 class_names = image_datasets['train'].classes
 
-#temp variables for making graphs(rating of numbers epochs for validation loss, acc; training loss, acc)
+# temp variables for making graphs(rating of numbers epochs for validation loss, acc; training loss, acc)
 train_loss = []
 val_loss = []
 train_acc = []
@@ -72,15 +74,17 @@ val_acc = []
 epoch_counter_train = []
 epoch_counter_val = []
 
-#making the function for training model
+# making the function for training model
+
+
 def train_model(model, criterion, optimizer, scheduler, num_epochs):
     since = time.time()
-    
+
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
     for epoch in range(num_epochs):
-        print('Epoch {}/{}'.format(epoch +1, num_epochs))
+        print('Epoch {}/{}'.format(epoch + 1, num_epochs))
         print('-' * 10)
 
         for phase in ['train', 'val']:
@@ -113,24 +117,25 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs):
 
             if phase == "train":
                 train_loss.append(running_loss/dataset_sizes[phase])
-                train_acc.append(running_corrects.double() / dataset_sizes[phase])
+                train_acc.append(running_corrects.double() /
+                                 dataset_sizes[phase])
                 epoch_counter_train.append(epoch)
             if phase == "val":
-                val_loss.append(running_loss/ dataset_sizes[phase])
-                val_acc.append(running_corrects.double() / dataset_sizes[phase])
+                val_loss.append(running_loss / dataset_sizes[phase])
+                val_acc.append(running_corrects.double() /
+                               dataset_sizes[phase])
                 epoch_counter_val.append(epoch)
 
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
-    
-            if phase == "train":    
+
+            if phase == "train":
                 epoch_loss = running_loss / dataset_sizes[phase]
                 epoch_acc = running_corrects.double() / dataset_sizes[phase]
-            if phase == "val":    
+            if phase == "val":
                 epoch_loss = running_loss / dataset_sizes[phase]
                 epoch_acc = running_corrects.double() / dataset_sizes[phase]
-            
-            
+
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                 phase, epoch_loss, epoch_acc))
 
@@ -146,6 +151,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs):
     model.load_state_dict(best_model_wts)
     return model
 
+
 model_ft = models.resnet50(pretrained=True)
 
 for param in model_ft.parameters():
@@ -154,25 +160,25 @@ for param in model_ft.parameters():
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, 7)
 
-#making cuda render for model
+# making cuda render for model
 model_ft = model_ft.to(device)
 
 criterion = nn.CrossEntropyLoss()
 
-optimizer_ft = optim.SGD(model_ft.parameters(), lr = 0.001, momentum=0.9)
+optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=100, gamma=0.1)
 
-#cleansing cuda cache
-torch.cuda.empty_cache() 
+# cleansing cuda cache
+torch.cuda.empty_cache()
 
 model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
                        num_epochs=100)
 
-#saving model
+# saving model
 torch.save(model_ft, 'data/model/model_torch/model_torch_resnet50.pth')
 
-#Accuracy on the test data
+# Accuracy on the test data
 correct_it = 0
 all_iter = 0
 class_correct = list(0. for i in range(7))
@@ -180,35 +186,35 @@ class_total = list(0. for i in range(7))
 
 with torch.no_grad():
     for i, (inputs, labels) in enumerate(dataloaders['test']):
-            inputs = inputs.to(device)
-            labels = labels.to(device)
-            outputs = model_ft(inputs)
-            _, predicted = torch.max(outputs.data, 1)
-            all_iter += labels.size(0)
-            correct_it += (predicted == labels).sum().item()
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+        outputs = model_ft(inputs)
+        _, predicted = torch.max(outputs.data, 1)
+        all_iter += labels.size(0)
+        correct_it += (predicted == labels).sum().item()
 
-            _, predicted = torch.max(outputs, 1)
-            point = (predicted == labels).squeeze()
-            for j in range(len(labels)):
-                label = labels[j]
-                class_correct[label] += point[j].item()
-                class_total[label] += 1
+        _, predicted = torch.max(outputs, 1)
+        point = (predicted == labels).squeeze()
+        for j in range(len(labels)):
+            label = labels[j]
+            class_correct[label] += point[j].item()
+            class_total[label] += 1
 
-#printing results
+# printing results
 print('Accuracy on the test data: %d %%' % (100 * correct_it / all_iter))
 
 for l in range(7):
     print('Accuracy of %5s : %2d %%' % (
         class_names[l], 100 * class_correct[l] / class_total[l]))
 
-#making dir for saving graphs
+# making dir for saving graphs
 savepath = 'data/graphs'
 try:
     os.mkdir(savepath)
 except Exception:
-    pass 
+    pass
 
-#making graphs for presentation(val_data acc, loss)
+# making graphs for presentation(val_data acc, loss)
 val_acc = [i.cpu().numpy() for i in val_acc]
 
 plt.figure()
@@ -216,5 +222,5 @@ plt.title('Ratio of number epochs for validation accuracy, loss')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy/Loss')
 
-plt.plot(epoch_counter_val, val_acc, color = 'm', label="validation accuracy")
+plt.plot(epoch_counter_val, val_acc, color='m', label="validation accuracy")
 plt.savefig('graphs/ratio_of_number_epochs_for_validation_accuracy_loss.png')

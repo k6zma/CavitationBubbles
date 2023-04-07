@@ -5,8 +5,11 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from torchvision import datasets, models, transforms
 from tqdm import tqdm
+
+# checking for available device
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+# data augmentation
 data_transforms = {
     'train': transforms.Compose([
         transforms.Resize(224),
@@ -31,8 +34,10 @@ data_transforms = {
     ])
 }
 
+# here u need to write the directory with yout data
 data_dir = 'data/data_base'
 
+# make datasets from our images
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
                   for x in ['train', 'val', 'test']}
@@ -47,8 +52,11 @@ print(dataset_sizes)
 # saving the name of the classes
 class_names = image_datasets['train'].classes
 print(class_names)
-model_ft = torch.load('data/model/model_torch/model_torch_vgg19.pth')
 
+# here u need to write the path with the neural_network model
+model_ft = torch.load('data/model/model_torch_vgg19.pth', map_location=device)
+
+# total accuracy on the test data_base
 correct = 0
 total = 0
 with torch.no_grad():
@@ -63,10 +71,11 @@ with torch.no_grad():
 print('Accuracy of the network on the test images: %d %%' % (
     100 * correct / total))
 
+# total accuracy on the test data_base of each classes
 class_correct = list(0. for i in range(7))
 class_total = list(0. for i in range(7))
 with torch.no_grad():
-    for i, (inputs, labels) in enumerate(dataloaders['test']):
+    for i, (inputs, labels) in tqdm(enumerate(dataloaders['test'])):
         inputs = inputs.to(device)
         labels = labels.to(device)
         outputs = model_ft(inputs)
