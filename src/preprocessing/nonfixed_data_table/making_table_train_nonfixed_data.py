@@ -7,15 +7,15 @@ from tqdm import tqdm
 import pandas as pd
 from pathlib import Path
 
-SAVE_PATH = 'data/nonfixed_data/output_train'
+SAVE_PATH = 'data/data_base/output_train'
 all_files = list()
 
-if os.path.exists('data/nonfixed_data/tmp_csv_train'):
+if os.path.exists('data/data_base/tmp_csv_train'):
     pass
 else:
-    os.mkdir('data/nonfixed_data/tmp_csv_train')
+    os.mkdir('data/data_base/tmp_csv_train')
 
-for root, dirs, files in os.walk('data/nonfixed_data/train'):
+for root, dirs, files in os.walk('data/data_base/train'):
     for file in files:
         if file.endswith('.jpeg'):
             all_files.append(os.path.join(root, file)
@@ -115,56 +115,56 @@ for file in tqdm(all_files):
         os.sep)[-1][:-5]+"_description.csv"))
 
 
-water_0_dir = Path("data/nonfixed_data/output_train/0_water")
-alcohol_5_dir = Path("data/nonfixed_data/output_train/5_alcohol")
-alcohol_12_5_dir = Path("data/nonfixed_data/output_train/12.5_alcohol")
-alcohol_25_dir = Path("data/nonfixed_data/output_train/25_alcohol")
-alcohol_50_dir = Path("data/nonfixed_data/output_train/50_alcohol")
-alcohol_75_dir = Path("data/nonfixed_data/output_train/75_alcohol")
-alcohol_96_dir = Path("data/nonfixed_data/output_train/96_alcohol")
-ResultTest_dir = Path("data/nonfixed_data/tmp_csv_train")
+water_0_dir = Path("data/data_base/output_train/0_water")
+alcohol_5_dir = Path("data/data_base/output_train/5_alcohol")
+alcohol_12_5_dir = Path("data/data_base/output_train/12.5_alcohol")
+alcohol_25_dir = Path("data/data_base/output_train/25_alcohol")
+alcohol_50_dir = Path("data/data_base/output_train/50_alcohol")
+alcohol_75_dir = Path("data/data_base/output_train/75_alcohol")
+alcohol_96_dir = Path("data/data_base/output_train/96_alcohol")
+ResultTest_dir = Path("data/data_base/tmp_csv_train")
 
 df_0_water = pd.concat([pd.read_csv(f)
                        for f in water_0_dir.glob("*.csv")], ignore_index=True)
 df_0_water.drop(columns=df_0_water.columns[0], axis=1, inplace=True)
-df_0_water.to_csv("data/nonfixed_data/tmp_csv_train/0_water.csv", index=False)
+df_0_water.to_csv("data/data_base/tmp_csv_train/0_water.csv", index=False)
 
 df_5_alcohol = pd.concat([pd.read_csv(f)
                          for f in alcohol_5_dir.glob("*.csv")], ignore_index=True)
 df_5_alcohol.drop(columns=df_5_alcohol.columns[0], axis=1, inplace=True)
 df_5_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/5_alcohol.csv", index=False)
+    "data/data_base/tmp_csv_train/5_alcohol.csv", index=False)
 
 df_12_5_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_12_5_dir.glob("*.csv")], ignore_index=True)
 df_12_5_alcohol.drop(columns=df_12_5_alcohol.columns[0], axis=1, inplace=True)
 df_12_5_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/12.5_alcohol.csv", index=False)
+    "data/data_base/tmp_csv_train/12.5_alcohol.csv", index=False)
 
 df_25_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_25_dir.glob("*.csv")], ignore_index=True)
 df_25_alcohol.drop(columns=df_25_alcohol.columns[0], axis=1, inplace=True)
 df_25_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/25_alcohol.csv", index=False)
+    "data/data_base/tmp_csv_train/25_alcohol.csv", index=False)
 
 df_50_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_50_dir.glob("*.csv")], ignore_index=True)
 df_50_alcohol.drop(columns=df_50_alcohol.columns[0], axis=1, inplace=True)
 df_50_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/50_alcohol.csv", index=False)
+    "data/data_base/tmp_csv_train/50_alcohol.csv", index=False)
 
 df_75_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_75_dir.glob("*.csv")], ignore_index=True)
 df_75_alcohol.drop(columns=df_75_alcohol.columns[0], axis=1, inplace=True)
 df_75_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/75_alchol.csv", index=False)
+    "data/data_base/tmp_csv_train/75_alchol.csv", index=False)
 
 df_96_alcohol = pd.concat(
     [pd.read_csv(f) for f in alcohol_96_dir.glob("*.csv")], ignore_index=True)
 df_96_alcohol.drop(columns=df_96_alcohol.columns[0], axis=1, inplace=True)
 df_96_alcohol.to_csv(
-    "data/nonfixed_data/tmp_csv_train/96_alcohol.csv", index=False)
+    "data/data_base/tmp_csv_train/96_alcohol.csv", index=False)
 
 df_ResultTest = pd.concat(
     [pd.read_csv(f) for f in ResultTest_dir.glob("*.csv")], ignore_index=True)
-df_ResultTest.to_csv("data/nonfixed_data/ResultTrain_NonFixedData.csv", index=False)
+df_ResultTest.to_csv("data/data_base/ResultTrain_NonFixedData.csv", index=False)

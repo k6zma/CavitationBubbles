@@ -31,7 +31,7 @@ data_transforms = {
     ])
 }
 
-data_dir = 'data/nonfixed_data'
+data_dir = 'data/data_base'
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
@@ -47,7 +47,7 @@ print(dataset_sizes)
 # saving the name of the classes
 class_names = image_datasets['train'].classes
 print(class_names)
-model_ft = torch.load('data/model/model_torch/model_torch.pth')
+model_ft = torch.load('data/model/model_torch/model_torch_vgg19.pth')
 
 correct = 0
 total = 0
