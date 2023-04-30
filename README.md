@@ -104,7 +104,7 @@ Best Hyperparameters:
 
 ## Neural Network
 
-ResNet50V2 with batch normalization was used to create a neural network. ResNet50V2 is a convolutional neural network that has 50 depth layers. These architectures have been trained on more than 1 million images from the ImageNet database and are able to classify more than 1000 types of objects in images (computer accessories, animals, plants, chemical elements, vehicles, air transport, bacteria, etc.). For this study, a neural network was created with two outputs: convolutional for images and linear for tables, and then these two outputs were combined into one.
+VGG19 with batch normalization was used to create a neural network. VGG19 is a convolutional neural network that has 19 depth layers. These architectures have been trained on more than 1 million images from the ImageNet database and are able to classify more than 1000 types of objects in images (computer accessories, animals, plants, chemical elements, vehicles, air transport, bacteria, etc.).
 
 ## Сonclusions
 
