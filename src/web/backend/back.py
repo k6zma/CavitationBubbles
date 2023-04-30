@@ -4,8 +4,13 @@ from fastapi import FastAPI, File, UploadFile
 import uvicorn
 from io import BytesIO
 from PIL import Image
-from schemas import Predict
 from starlette.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+
+class Predict(BaseModel):
+    class_name: str
+
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = torch.load('data/model/model_torch_vgg19.pth', map_location=device)
@@ -43,16 +48,26 @@ async def predict(file: UploadFile = File(...)):
     batch_img = torch.unsqueeze(img_preproc, 0)
     model.eval()
     out = model(batch_img)
-    out = out.tolist()
-    return Predict(
-        water_0=round(out[0][0] * 100, 3),
-        alcohol_5=round(out[0][1] * 100, 3),
-        alcohol_12_5=round(out[0][2] * 100, 3),
-        alcohol_25=round(out[0][3] * 100, 3),
-        alcohol_50=round(out[0][4] * 100, 3),
-        alcohol_75=round(out[0][5] * 100, 3),
-        alcohol_96=round(out[0][6] * 100, 3),
-    )
+    out = out.tolist()[0]
+    max_value = max(out)
+    temp_prediction = out.index(max_value)
+
+    if temp_prediction == 0:
+        final_predict = '0% alcohol'
+    elif temp_prediction == 1:
+        final_predict = '12,5% alcohol'
+    elif temp_prediction == 2:
+        final_predict = '25% alcohol'
+    elif temp_prediction == 3:
+        final_predict = '50% alcohol'
+    elif temp_prediction == 4:
+        final_predict = '5% alcohol'
+    elif temp_prediction == 5:
+        final_predict = '75% alcohol'
+    elif temp_prediction == 6:
+        final_predict = '96% alcohol'
+
+    return Predict(class_name=final_predict)
 
 
 if __name__ == "__main__":

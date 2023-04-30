@@ -20,7 +20,7 @@ import seaborn as sn
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # folder with data
-data_dir = 'data/nonfixed_data'
+data_dir = 'data/data_base'
 
 # making dir for saving model
 savepath = 'data/model/model_torch'
