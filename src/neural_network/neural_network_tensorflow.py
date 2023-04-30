@@ -87,5 +87,6 @@ current_model.summary()
 history = current_model.fit(train_dataset, epochs=EPOCHS,
                             validation_data=test_dataset, callbacks=[tensorflow_callback])
 current_model.save('data/model/my_model.h5py')
+
 pd.DataFrame.from_dict(history.history).to_csv(
     os.path.join('data/model/history.csv'), index=False)

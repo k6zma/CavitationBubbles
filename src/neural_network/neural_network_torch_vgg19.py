@@ -20,7 +20,7 @@ import seaborn as sn
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # folder with data
-data_dir = 'data/nonfixed_data'
+data_dir = 'data/data_base'
 
 # making dir for saving model
 savepath = 'model'
@@ -161,7 +161,7 @@ for param in model_ft.features.parameters():
 
 num_features = model_ft.classifier[6].in_features
 features = list(model_ft.classifier.children())[:-1]
-features.extend([nn.Linear(num_features, len(class_names))])
+features.extend([nn.Linear(num_features, len(class_names)), nn.Softmax()])
 model_ft.classifier = nn.Sequential(*features)
 
 # making cuda render for model
