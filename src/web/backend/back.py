@@ -13,7 +13,7 @@ class Predict(BaseModel):
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = torch.load('data/model/model_torch_vgg19.pth', map_location=device)
+model = torch.load('data/model/model_torch/model_torch_vgg19.pth', map_location=device)
 
 app = FastAPI()
 
