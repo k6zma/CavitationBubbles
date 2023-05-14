@@ -4,5 +4,6 @@ module.exports = {
 module.exports = {
   devServer: {
     allowedHosts: "all",
+    https: true,
   }
 }
