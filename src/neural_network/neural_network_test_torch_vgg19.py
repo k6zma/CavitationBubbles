@@ -5,6 +5,7 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from torchvision import datasets, models, transforms
 from tqdm import tqdm
+from sklearn.metrics import classification_report
 
 # checking for available device
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -54,7 +55,8 @@ class_names = image_datasets['train'].classes
 print(class_names)
 
 # here u need to write the path with the neural_network model
-model_ft = torch.load('data/model/model_torch_vgg19.pth', map_location=device)
+model_ft = torch.load(
+    'data/model/model_torch/model_torch_vgg19.pth', map_location=device)
 
 # total accuracy on the test data_base
 correct = 0
@@ -89,3 +91,18 @@ with torch.no_grad():
 for i in range(7):
     print('Accuracy of %5s : %2d %%' % (
         class_names[i], 100 * class_correct[i] / class_total[i]))
+
+# classification report
+test_labels = []
+test_preds = []
+
+with torch.no_grad():
+    for i, (inputs, labels) in tqdm(enumerate(dataloaders['test'])):
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+        outputs = model_ft(inputs)
+        _, predicted = torch.max(outputs.data, 1)
+        test_labels += list(labels.cpu().numpy())
+        test_preds += list(predicted.cpu().numpy())
+
+print(classification_report(test_labels, test_preds, target_names=class_names))
