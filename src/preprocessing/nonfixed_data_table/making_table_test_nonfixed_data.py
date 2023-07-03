@@ -168,4 +168,4 @@ df_96_alcohol.to_csv(
 df_ResultTest = pd.concat(
     [pd.read_csv(f) for f in ResultTest_dir.glob("*.csv")], ignore_index=True)
 df_ResultTest.to_csv(
-    "data/data_base/ResultTest_NonFixedData.csv", index=False)
+    "data/data_base/ResultTest.csv", index=False)
