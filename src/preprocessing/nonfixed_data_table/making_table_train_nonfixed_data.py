@@ -167,4 +167,4 @@ df_96_alcohol.to_csv(
 
 df_ResultTest = pd.concat(
     [pd.read_csv(f) for f in ResultTest_dir.glob("*.csv")], ignore_index=True)
-df_ResultTest.to_csv("data/data_base/ResultTrain.csv", index=False)
+df_ResultTest.to_csv("data/ResultTrain.csv", index=False)
