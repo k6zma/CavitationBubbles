@@ -41,21 +41,17 @@ def read_imagefile(file) -> Image.Image:
     image = Image.open(BytesIO(file)).convert('RGB')
     return image
 
-def decoding(temp_prediction:int):
-    if temp_prediction == 0:
-        final_predict = '0% alcohol'
-    elif temp_prediction == 1:
-        final_predict = '12,5% alcohol'
-    elif temp_prediction == 2:
-        final_predict = '25% alcohol'
-    elif temp_prediction == 3:
-        final_predict = '50% alcohol'
-    elif temp_prediction == 4:
-        final_predict = '5% alcohol'
-    elif temp_prediction == 5:
-        final_predict = '75% alcohol'
-    elif temp_prediction == 6:
-        final_predict = '96% alcohol'
+def decoding(temp_prediction: int):
+    alcohol_levels = {
+        0: '0% alcohol',
+        1: '12.5% alcohol',
+        2: '25% alcohol',
+        3: '50% alcohol',
+        4: '5% alcohol',
+        5: '75% alcohol',
+        6: '96% alcohol'
+    }
+    final_predict = alcohol_levels.get(temp_prediction)
     return final_predict
 
 def prediction(file):
