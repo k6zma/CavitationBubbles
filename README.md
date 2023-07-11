@@ -170,7 +170,7 @@ Best Hyperparameters:
 
 ### CatBoostClassifier - average model accuracy on test data ~ 79%
 
-<img src="img/pixels-of-bubbles/Catboost_cm_pixels.png" width="450px" height="340px">
+<img src="img/pixels-of-bubbles/CatBoost_cm_pixels.png" width="450px" height="340px">
 
 ## Neural Network:
 
