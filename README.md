@@ -74,7 +74,7 @@ In order not to translate the image into an array every time in the future, it w
 
 A fragment of the code for converting an image into a one-dimensional array:
 
-```
+```python
 data_train = []
 labels_train = []
 
