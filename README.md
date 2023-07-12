@@ -109,7 +109,7 @@ Best Hyperparameters:
 ```python
 - 'metric' = 'manhattan'
 - 'n_neighbors' = 97
-- 'weights' = distance
+- 'weights' = 'distance'
 ```
 
 <img src="img/info-about-bubbles/KNeighbors_cm_info.png" width="450px" height="340px">
@@ -150,12 +150,12 @@ Best Hyperparameters:
 
 Best Hyperparameters:
 
-```
-- bootstrap: True
- - max_depth: 90 
-- min_samples_leaf: 1 
-- min_samples_split: 5 
-- n_estimators: 600
+```python
+- 'bootstrap' = True
+- 'max_depth' = 90 
+- 'min_samples_leaf' = 1 
+- 'min_samples_split' = 5 
+- 'n_estimators' = 600
 ```
 
 <img src="img/pixels-of-bubbles/RandomForest_cm_pixels.png" width="450px" height="340px">
