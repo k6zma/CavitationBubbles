@@ -106,10 +106,10 @@ First, let's talk about models trained on data that describe the characteristics
 
 Best Hyperparameters:
 
-```
-- metric: manhattan
-- n_neighbors: 97
-- weights: distance
+```python
+- 'metric' = 'manhattan'
+- 'n_neighbors' = 97
+- 'weights' = distance
 ```
 
 <img src="img/info-about-bubbles/KNeighbors_cm_info.png" width="450px" height="340px">
@@ -118,12 +118,12 @@ Best Hyperparameters:
 
 Best Hyperparameters:
 
-```
-- bootstrap: True
- - max_depth: 90 
-- min_samples_leaf: 1 
-- min_samples_split: 5 
-- n_estimators: 600
+```python
+- 'bootstrap' = True
+- 'max_depth' = 90 
+- 'min_samples_leaf' = 1 
+- 'min_samples_split' = 5 
+- 'n_estimators' = 600
 ```
 
 <img src="img/info-about-bubbles/RandomForest_cm_info.png" width="450px" height="340px">
@@ -132,13 +132,13 @@ Best Hyperparameters:
 
 Best Hyperparameters:
 
-```
-- max_depth: 5 
-- max_features: sqrt 
-- min_samples_leaf: 0.1 
-- min_samples_split: 0.1 
-- n_estimators: 10 
-- subsample: 1.0
+```python
+- 'max_depth' = 5 
+- 'max_features' = 'sqrt' 
+- 'min_samples_leaf' = 0.1 
+- 'min_samples_split' = 0.1 
+- 'n_estimators' = 10 
+- 'subsample' = 1.0
 ```
 
 <img src="img/info-about-bubbles/GradientBoosting_cm_info.png" width="450px" height="340px">
