@@ -169,3 +169,6 @@ df_ResultTest = pd.concat(
     [pd.read_csv(f) for f in ResultTest_dir.glob("*.csv")], ignore_index=True)
 df_ResultTest.to_csv(
     "data/ResultTest.csv", index=False)
+
+os.remove('data/data_base/output_test')
+os.remove('data/data_base/tmp_csv_test')
