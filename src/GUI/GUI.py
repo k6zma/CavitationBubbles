@@ -37,8 +37,11 @@ def select_image():
         panelB.image = image_edited
 
 root = tk.Tk()
+
 panelA = None
 panelB = None
+
 btn = tk.Button(root, text='Select an image', command=select_image)
 btn.pack(side='bottom', fill='both', expand='yes', padx='10', pady='10')
+
 root.mainloop()
