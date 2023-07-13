@@ -103,6 +103,7 @@ def genereaion_image(path):
     for point in bigger_contour:
         new_distance = hypot(point[0][0] - cX, point[0][1] - cY)
         distance.append(new_distance)
+        
     distance = np.array(distance)
     dist_res = distance
     distance = min(distance)
