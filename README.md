@@ -1,5 +1,9 @@
 # Ultrasound research cavitation bubbles for determination of alcohol concentration in water-ethanol solutions with using methods of machine learning and neural networks.
 
+<div align="center">
+    <img src="img/logo.webp" width=70%>
+</div>    
+
 ## Data, presentation and documentation:
 https://drive.google.com/drive/folders/1gSwnT1ky-ZAcXc2xGCG630pLzgssIOwa?usp=sharing
 
